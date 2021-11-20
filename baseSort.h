@@ -5,7 +5,7 @@
 #ifndef SORTUTILITY_BASESORT_H
 #define SORTUTILITY_BASESORT_H
 #include <algorithm>
-#define MAXLENGTH 1000001
+#define MAXLENGTH 10000001
 template <typename E>
 class baseSort {
 public:
@@ -20,6 +20,13 @@ public:
 	E* getResult()
 	{
 		return baseSort<E>::result;
+	}
+	void printAll(int size)
+	{
+		for (int i = 0; i <= size - 1; i++)
+		{
+			std::cout << result[i] << std::endl;
+		}
 	}
 };
 
