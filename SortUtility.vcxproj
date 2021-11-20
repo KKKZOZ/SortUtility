@@ -120,7 +120,14 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <StackReserveSize>52428800</StackReserveSize>
+      <StackReserveSize>524288000</StackReserveSize>
+      <LargeAddressAware>false</LargeAddressAware>
+      <HeapReserveSize>
+      </HeapReserveSize>
+      <HeapCommitSize>
+      </HeapCommitSize>
+      <StackCommitSize>
+      </StackCommitSize>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -144,6 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="baseSort.h" />
+    <ClInclude Include="heapSort.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="shellsort.h" />
     <ClInclude Include="testSort.h" />

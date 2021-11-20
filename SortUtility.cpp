@@ -6,6 +6,7 @@
 #include <windows.h>
 #include "baseSort.h"
 #include "shellsort.h"
+#include "heapSort.h"
 #include "testSort.h"
 
 using namespace std;
@@ -22,27 +23,33 @@ const string DECREASE = "DECREASE";
  * 时间计算(从开始到结束)
  *
  * */
-void generateRandomData(int size, string sortName, string mode, int append);
+void generateRandomData(string sortName, int size, string mode, int append);
 bool compare_increase(int a, int b);
 bool compare_decrease(int a, int b);
 template <typename E>
 void execute(baseSort<E>* base, int size, string mode, int append);
+int read();
+void write(int x);
 int main() {
     //Initialize
     shellsort<int>* shellsort = new ::shellsort<int>;
     testSort<int>* testsort = new ::testSort<int>;
+    heapSort<int>* heapsort = new ::heapSort<int>;
     srand(time(NULL));
-    cout << testsort->getName() << endl;
-    generateRandomData(10, testsort->getName(), RANDOM, 0);
-    cout << "123" << endl;
-    execute(testsort, 10, RANDOM, 0);
+    cout << heapsort->getName() << endl;
+    int testSize = 10000000;
+    cout << 10000000 * sizeof(int)/1024/1024 << endl;
+    //10000001
+    //10000000
+    generateRandomData(heapsort->getName(),testSize, DECREASE, 0);
+    execute(heapsort, testSize, DECREASE, 0);
     delete shellsort;
     delete testsort;
+    delete heapsort;
     return 0;
 }
-void generateRandomData(int size, string sortName, string mode, int append) {
+void generateRandomData(string sortName,int size, string mode, int append) {
     //TODO append未实现
-    cout << "123" << endl;
     int dataSet[MAXLENGTH];
     //默认单个数据大小为0~50000
     sortName = "./" + sortName + "_" +std::to_string(size) + "_" + mode + ".txt";
@@ -50,7 +57,7 @@ void generateRandomData(int size, string sortName, string mode, int append) {
     const char* fileName = sortName.c_str();
 
     for (int i = 1; i <= size; ++i) {
-        dataSet[i] = rand() % 50001;
+        dataSet[i] = rand()*rand() % 500000001;
     }
     if (mode == INCREASE) {
         sort(dataSet + 1, dataSet + 1 + size, compare_increase);
@@ -58,22 +65,22 @@ void generateRandomData(int size, string sortName, string mode, int append) {
     if (mode == DECREASE) {
         sort(dataSet + 1, dataSet + 1 + size, compare_decrease);
     }
-    for (int i = 1; i <= size; ++i) {
+  /*  for (int i = 1; i <= size; ++i) {
         cout << dataSet[i] << endl;
-    }
+    }*/
     //Output to file
     FILE* fp = freopen(fileName, "w", stdout);
     cout << size << endl;
     for (int i = 1; i <= size; ++i) {
-        cout << dataSet[i] << endl;
+        //cout << dataSet[i] << endl;
+        write(dataSet[i]);
+        printf("\n");
     }
     fflush(fp);
     freopen("CON", "w", stdout);
-    printf("OVER");
 }
 template <typename E>
 void execute(baseSort<E>* base, int size, string mode, int append) {
-    cout << "1233" << endl;
     int dataSet[MAXLENGTH];
     int result[MAXLENGTH];
     // sortName = "./" + sortName + "_" +std::to_string(size) + "_" + mode + ".txt";
@@ -83,14 +90,14 @@ void execute(baseSort<E>* base, int size, string mode, int append) {
     int temp;
     scanf("%d", &temp);
     for (int i = 1; i <= size; ++i) {
-        scanf("%d", &temp);
+        temp = read();
         dataSet[i] = temp;
     }
-    cout << "Test:" << endl;
+    /*cout << "Test:" << endl;
     for (int i = 1; i <= size; i++)
     {
         cout << dataSet[i] << endl;
-    }
+    }*/
     base->prepare(dataSet, size);
     cout << "Ready to execute" << endl;
     DWORD startTime = GetTickCount64();//计时开始
@@ -98,7 +105,10 @@ void execute(baseSort<E>* base, int size, string mode, int append) {
     cout << "Over" << endl;
     //result = base->getresult();
     DWORD endTime = GetTickCount64();//计时结束
-    cout << startTime - endTime << endl;
+    cout << "startTime:" << startTime << endl;
+    cout << "endTime:" << endTime << endl;
+    cout <<"Time consuming:" << endTime-startTime << endl;
+    //base->printAll(size);
 
     //TODO 输出相应文件
 }
@@ -109,4 +119,29 @@ bool compare_increase(int a, int b)
 bool compare_decrease(int a, int b)
 {
     return a > b;
+}
+inline int read() {
+    register int x = 0, t = 1;
+    register char ch = getchar(); // 读入单个字符到寄存器
+    while (ch < '0' || ch>'9') {
+        if (ch == '-')
+            t = -1;
+        ch = getchar();
+    }
+    while (ch >= '0' && ch <= '9') {
+        x = (x << 1) + (x << 3) + (ch ^ 48);  // 移位与异或
+        // 第十行可以换成 x = x * 10 + ch - '0'
+        ch = getchar();
+    }
+    return x * t;
+}
+inline void write(int x)
+{
+    if (x < 0) {
+        putchar('-');
+        x = -x;
+    }
+    if (x > 9)
+        write(x / 10);
+    putchar(x % 10 + '0');
 }
