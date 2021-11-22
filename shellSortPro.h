@@ -12,17 +12,17 @@ public:
     {
         //int gap = length(a)/2 ;
         int gap = 1;
-        while (gap < length(a) / 3) {
-            gap = 3 * gap + 1;  // 1 , 4 , 13 , 40 , 121 , 364 , 1093...
+        while (gap < size / 4) {
+            gap = 4 * gap + 1;  // 1 , 4 , 13 , 40 , 121 , 364 , 1093...
         }
-        int temp = 0;
+        E temp;
         int ex = 0;
-        for (int i = length(a); i > 0; i--) {
-            if (a[i] < a[i - 1])
+        for (int i = size - 1; i > 0; i--) {
+            if (baseSort<E>::result[i] < baseSort<E>::result[i - 1])
             {
-                temp = a[i];
-                a[i] = a[i - 1];
-                a[i - 1] = temp;
+                temp = baseSort<E>::result[i];
+                baseSort<E>::result[i] = baseSort<E>::result[i - 1];
+                baseSort<E>::result[i - 1] = temp;
                 ex++;
             }
 
@@ -33,18 +33,18 @@ public:
         }
 
         do {
-            int temp = 0;
-            for (int i = gap; i <= length(a); i++) {
+            E temp;
+            for (int i = gap; i < size; i++) {
                 for (int j = i; j >= gap; j -= gap) {
-                    if (a[j - gap] > a[j]) {
-                        temp = a[j - gap];
-                        a[j - gap] = a[j];
-                        a[j] = temp;
+                    if (baseSort<E>::result[j - gap] > baseSort<E>::result[j]) {
+                        temp = baseSort<E>::result[j - gap];
+                        baseSort<E>::result[j - gap] = baseSort<E>::result[j];
+                        baseSort<E>::result[j] = temp;
                     }
                 }
-            } 
-            gap /= 3;
-        } while (gap != 0); 
+            }
+            gap /= 4;
+        } while (gap != 0);
     }
 
 

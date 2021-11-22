@@ -52,7 +52,7 @@ int main() {
 
     srand(time(NULL));
     cout << binsort->getName() << endl;
-    int testSize = 10000;
+    int testSize = 100000;
     //testSize最大不能超过：
     //100000001
     
@@ -60,7 +60,7 @@ int main() {
    
 
     //singleRoundTest(binsort, testSize, RANDOM);
-    multiRoundTest(shellsortpro, testSize, RANDOM,1,1);
+    multiRoundTest(shellsortpro, testSize, RANDOM,2,1);
 
 
    /* generateRandomData(radixsortdec->getName(),testSize, RANDOM, 0);
