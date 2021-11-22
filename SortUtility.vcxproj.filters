@@ -38,6 +38,15 @@
     <ClInclude Include="heapSort.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="binSort.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="radixSortDec.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="shellSortPro.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="shellSort_10_RANDOM.txt">

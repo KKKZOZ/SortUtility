@@ -5,7 +5,7 @@
 #ifndef SORTUTILITY_BASESORT_H
 #define SORTUTILITY_BASESORT_H
 #include <algorithm>
-#define MAXLENGTH 10000001
+#define MAXLENGTH 100000001
 template <typename E>
 class baseSort {
 public:

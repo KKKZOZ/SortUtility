@@ -120,8 +120,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <StackReserveSize>524288000</StackReserveSize>
-      <LargeAddressAware>false</LargeAddressAware>
+      <StackReserveSize>2147483648</StackReserveSize>
+      <LargeAddressAware>true</LargeAddressAware>
       <HeapReserveSize>
       </HeapReserveSize>
       <HeapCommitSize>
@@ -151,9 +151,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="baseSort.h" />
+    <ClInclude Include="binSort.h" />
     <ClInclude Include="heapSort.h" />
+    <ClInclude Include="radixSortDec.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="shellsort.h" />
+    <ClInclude Include="shellSortPro.h" />
     <ClInclude Include="testSort.h" />
   </ItemGroup>
   <ItemGroup>

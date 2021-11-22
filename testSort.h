@@ -10,14 +10,11 @@ public:
 	~testSort() {}
 	void sort(int size)
 	{
-		std::cout << "Sorting..." << std::endl;
-		for (int i = 0; i <= size-1; i++) {
-			std::cout << baseSort<E>::result[i] << std::endl;
-		}
+		
 	}
 	std::string getName()
 	{
-		return "testSort";
+		return "txzzxzSort";
 	}
 	
 };
